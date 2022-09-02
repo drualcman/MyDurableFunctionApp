@@ -35,7 +35,7 @@ namespace MyDurableFunctionApp
             return $"Hello {name}!";
         }
 
-        [FunctionName("MyDurableFunction_HttpStart")]
+        [FunctionName("MyDurableFunction_HttpStart_Data")]
         public static async Task<HttpResponseMessage> HttpStart(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post")] HttpRequestMessage req,
             [DurableClient] IDurableOrchestrationClient starter,
@@ -49,6 +49,7 @@ namespace MyDurableFunctionApp
             return response;
         }
 
+        [FunctionName("MyDurableFunction_HttpStart")]
          public static async Task<HttpResponseMessage> HttpStartOriginal(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post")] HttpRequestMessage req,
             [DurableClient] IDurableOrchestrationClient starter,
@@ -62,6 +63,7 @@ namespace MyDurableFunctionApp
             return starter.CreateCheckStatusResponse(req, instanceId);
         }
 
+        [FunctionName("MyDurableFunction_HttpStart_HttpClient")]
         public static async Task<List<string>> HttpStartRecoverDataUsingHttpClient(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post")] HttpRequestMessage req,
             [DurableClient] IDurableOrchestrationClient starter,
@@ -87,6 +89,7 @@ namespace MyDurableFunctionApp
             return result;
         }
         
+        [FunctionName("MyDurableFunction_HttpStart_MessageResponse")]
         public static async Task<List<string>> HttpStartRecoverDataUsingHttpMessageResponse(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post")] HttpRequestMessage req,
             [DurableClient] IDurableOrchestrationClient starter,
